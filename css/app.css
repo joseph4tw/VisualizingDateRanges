@@ -1,0 +1,11 @@
+#app {
+  width: 100%;
+}
+
+#app svg {
+  background-color: #eee;
+}
+
+body {
+  margin-bottom: 10rem;
+}

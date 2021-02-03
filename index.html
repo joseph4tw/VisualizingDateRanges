@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="./css/bootstrap.min.css" />
+  <link rel="stylesheet" href="./css/overrides.css" />
+  <link rel="stylesheet" href="./css/app.css" />
+
+  <title>Hello, world!</title>
+</head>
+
+<body>
+  <div class="container">
+    <h1 class="mt-3">Visualizing Date Ranges</h1>
+    <p class="mt-4">Sometimes thinking about date ranges and how to filter on them can be
+      challenging. In this example, I want to share what I found to be pretty
+      helpful with thinking about date ranges.
+    </p>
+
+    <p>
+      Imagine you have the date range <code>RangeMin</code> to <code>RangeMax</code>. We can visualize this
+      with the following image.
+    </p>
+
+    <div id="app"></div>
+
+    <select id="select" class="custom-select custom-select-lg mt-3 mb-3">
+      <option value="reset" selected>Select a Date Range Filter</option>
+      <option value="startsBeforeRangeMin">Start Date is before the RangeMin</option>
+      <option value="startsAfterRangeMin">Start Date is after the RangeMin</option>
+      <option value="startOrEndWithinRange">Start Date or End Date Within Range</option>
+      <option value="startsAndEndsWithinRange">Start Date and End Date within Range</option>
+      <option value="beforeRange">Start Date and End Date is before the Range</option>
+      <option value="afterRange">Start Date and End Date is after the Range</option>
+      <option value="outsideRange">Anything that is outside the Range</option>
+      <option value="involvingRange">Anything that involves the Range</option>
+    </select>
+
+    <p>
+      Based on the selection you make, here would be the condition expression you would use (JavaScript):
+    </p>
+
+    <h2>Condition Expression</h2>
+    <pre>
+
+  <code id="filterExpression">Please select a date range filter...</code>
+    </pre>
+
+    <h2>Explanation</h2>
+    <p id="explanation">Please select a date range filter...</p>
+  </div>
+
+  <script src="./js/jquery-3.5.1.slim.min.js"></script>
+  <script src="./js/popper.min.js"></script>
+  <script src="./js/bootstrap.bundle.min.js"></script>
+  <script src="./js/d3.v6.min.js"></script>
+  <script src="./js/app.js"></script>
+</body>
+
+</html>
