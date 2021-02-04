@@ -150,7 +150,7 @@ const rangeMaxLine = svg.append('line')
 const dateRangeElms = [outLeftGroup, inLeftGroup, enclosedGroup, inRightGroup, outRightGroup, extendsGroup];
 
 const code = document.getElementById('filterExpression');
-const explanation = document.getElementById('explanation');
+// const explanation = document.getElementById('explanation');
 
 document.getElementById('select').addEventListener('change', (e) => {
   dateRangeElms.forEach(_ => makeInactive(_));
@@ -160,11 +160,8 @@ document.getElementById('select').addEventListener('change', (e) => {
   switch (filter) {
     case 'reset':
       dateRangeElms.forEach(_ => reset(_));
-      code.textContent = 'Please select a date range filter...'
-      break;
-
-    case 'beforeRange':
-      beforeRange();
+      code.textContent = 'Please select a date range filter...';
+      // explanation.textContent = 'Please select a date range filter...';
       break;
 
     case 'startsBeforeRangeMin':
@@ -175,16 +172,40 @@ document.getElementById('select').addEventListener('change', (e) => {
       startsAfterRangeMin();
       break;
 
-    case 'startOrEndWithinRange':
-      startOrEndWithinRange();
+    case 'startsBeforeRangeMax':
+      startsBeforeRangeMax();
       break;
 
-    case 'startsAndEndsWithinRange':
-      startsAndEndsWithinRange();
+    case 'startsAfterRangeMax':
+      startsAfterRangeMax();
       break;
 
-    case 'afterRange':
-      afterRange();
+    case 'endsBeforeRangeMin':
+      endsBeforeRangeMin();
+      break;
+
+    case 'endsAfterRangeMin':
+      endsAfterRangeMin();
+      break;
+
+    case 'endsBeforeRangeMax':
+      endsBeforeRangeMax();
+      break;
+
+    case 'endsAfterRangeMax':
+      endsAfterRangeMax();
+      break;
+
+    case 'startsOrEndsInsideRange':
+      startsOrEndsInsideRange();
+      break;
+
+    case 'startsOrEndsOutsideRange':
+      startsOrEndsOutsideRange();
+      break;
+
+    case 'insideRange':
+      insideRange();
       break;
 
     case 'outsideRange':
@@ -200,39 +221,99 @@ document.getElementById('select').addEventListener('change', (e) => {
   }
 });
 
-function beforeRange() {
-  makeActive(outLeftGroup);
-}
-
 function startsBeforeRangeMin() {
   makeActive(outLeftGroup);
   makeActive(inLeftGroup);
   makeActive(extendsGroup);
+
+  code.textContent = "StartDate < RangeMin";
 }
 
 function startsAfterRangeMin() {
   makeActive(enclosedGroup);
   makeActive(inRightGroup);
   makeActive(outRightGroup);
+
+  code.textContent = "StartDate > RangeMin";
 }
 
-function startOrEndWithinRange() {
+function startsBeforeRangeMax() {
+  makeActive(outLeftGroup);
   makeActive(inLeftGroup);
   makeActive(enclosedGroup);
   makeActive(inRightGroup);
+  makeActive(extendsGroup);
+
+  code.textContent = "StartDate < RangeMax";
 }
 
-function startsAndEndsWithinRange() {
-  makeActive(enclosedGroup);
-}
-
-function afterRange() {
+function startsAfterRangeMax() {
   makeActive(outRightGroup);
+
+  code.textContent = "StartDate > RangeMax";
+}
+
+function endsBeforeRangeMin() {
+  makeActive(outLeftGroup);
+
+  code.textContent = "EndDate < RangeMin";
+}
+
+function endsAfterRangeMin() {
+  makeActive(inLeftGroup);
+  makeActive(enclosedGroup);
+  makeActive(inRightGroup);
+  makeActive(outRightGroup);
+  makeActive(extendsGroup);
+
+  code.textContent = "EndDate > RangeMin";
+}
+
+function endsBeforeRangeMax() {
+  makeActive(outLeftGroup);
+  makeActive(inLeftGroup);
+  makeActive(enclosedGroup);
+
+  code.textContent = "EndDate < RangeMax";
+}
+
+function endsAfterRangeMax() {
+  makeActive(inRightGroup);
+  makeActive(outRightGroup);
+  makeActive(extendsGroup);
+
+  code.textContent = "EndDate > RangeMax";
+}
+
+function startsOrEndsInsideRange() {
+  makeActive(inLeftGroup);
+  makeActive(enclosedGroup);
+  makeActive(inRightGroup);
+
+  code.textContent = "(StartDate >= RangeMin && StartDate <= RangeMax) || (EndDate >= RangeMin && EndDate <= RangeMax)";
+}
+
+function startsOrEndsOutsideRange() {
+  makeActive(outLeftGroup);
+  makeActive(inLeftGroup);
+  makeActive(inRightGroup);
+  makeActive(outRightGroup);
+  makeActive(extendsGroup);
+
+  code.textContent = "StartDate < RangeMin || EndDate > RangeMax";
+}
+
+function insideRange() {
+  makeActive(enclosedGroup);
+
+  code.textContent = "StartDate >= RangeMin && EndDate <= RangeMax";
 }
 
 function outsideRange() {
   makeActive(outLeftGroup);
   makeActive(outRightGroup);
+
+  code.textContent = "EndDate < RangeMin || StartDate > RangeMax";
 }
 
 function involvingRange() {
@@ -240,6 +321,8 @@ function involvingRange() {
   makeActive(enclosedGroup);
   makeActive(inRightGroup);
   makeActive(extendsGroup);
+
+  code.textContent = "StartDate < RangeMax && EndDate > RangeMin";
 }
 
 function makeActive(group) {
