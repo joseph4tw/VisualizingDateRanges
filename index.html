@@ -1,71 +1,80 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
 
-<head>
-  <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="./css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./css/overrides.css" />
+    <link rel="stylesheet" href="./css/app.css" />
 
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="./css/bootstrap.min.css" />
-  <link rel="stylesheet" href="./css/overrides.css" />
-  <link rel="stylesheet" href="./css/app.css" />
+    <title>Visualizing Date Ranges</title>
+  </head>
 
-  <title>Hello, world!</title>
-</head>
+  <body>
+    <div class="container">
+      <h1 class="mt-3">Visualizing Date Ranges</h1>
+      <p class="mt-4">
+        Sometimes thinking about date ranges and how to filter on them can be
+        challenging. In this example, I want to share what I found to be pretty
+        helpful with thinking about date ranges.
+      </p>
 
-<body>
-  <div class="container">
-    <h1 class="mt-3">Visualizing Date Ranges</h1>
-    <p class="mt-4">Sometimes thinking about date ranges and how to filter on them can be
-      challenging. In this example, I want to share what I found to be pretty
-      helpful with thinking about date ranges.
-    </p>
+      <p>
+        Imagine you have the date range <code>RangeMin</code> to
+        <code>RangeMax</code>. We can visualize this with the following image.
+        Each line represents an individual date range (say, a project timeline).
+        The dots represent that element's <code>StartDate</code> and
+        <code>EndDate</code>.
+      </p>
 
-    <p>
-      Imagine you have the date range <code>RangeMin</code> to <code>RangeMax</code>. We can visualize this
-      with the following image. Each line represents an individual date range (say, a project timeline).
-      The dots represent that element's <code>StartDate</code> and <code>EndDate</code>.
-    </p>
+      <div id="app"></div>
 
-    <div id="app"></div>
+      <select id="select" class="custom-select custom-select-lg mt-3 mb-3">
+        <option value="reset" selected>Select a Date Range Filter</option>
+        <option value="startsBeforeRangeMin">Starts before RangeMin</option>
+        <option value="startsAfterRangeMin">Starts after RangeMin</option>
+        <option value="startsBeforeRangeMax">Starts before RangeMax</option>
+        <option value="startsAfterRangeMax">Starts after RangeMax</option>
+        <option value="endsBeforeRangeMin">Ends before RangeMin</option>
+        <option value="endsAfterRangeMin">Ends after RangeMin</option>
+        <option value="endsBeforeRangeMax">Ends before RangeMax</option>
+        <option value="endsAfterRangeMax">Ends after RangeMax</option>
+        <option value="startsOrEndsInsideRange">
+          Starts or ends inside the Range
+        </option>
+        <option value="startsOrEndsOutsideRange">
+          Starts or ends outside the Range
+        </option>
+        <option value="insideRange">Anything that is inside the Range</option>
+        <option value="outsideRange">Anything that is outside the Range</option>
+        <option value="involvingRange">Anything that involves the Range</option>
+      </select>
 
-    <select id="select" class="custom-select custom-select-lg mt-3 mb-3">
-      <option value="reset" selected>Select a Date Range Filter</option>
-      <option value="startsBeforeRangeMin">Starts before RangeMin</option>
-      <option value="startsAfterRangeMin">Starts after RangeMin</option>
-      <option value="startsBeforeRangeMax">Starts before RangeMax</option>
-      <option value="startsAfterRangeMax">Starts after RangeMax</option>
-      <option value="endsBeforeRangeMin">Ends before RangeMin</option>
-      <option value="endsAfterRangeMin">Ends after RangeMin</option>
-      <option value="endsBeforeRangeMax">Ends before RangeMax</option>
-      <option value="endsAfterRangeMax">Ends after RangeMax</option>
-      <option value="startsOrEndsInsideRange">Starts or ends inside the Range</option>
-      <option value="startsOrEndsOutsideRange">Starts or ends outside the Range</option>
-      <option value="insideRange">Anything that is inside the Range</option>
-      <option value="outsideRange">Anything that is outside the Range</option>
-      <option value="involvingRange">Anything that involves the Range</option>
-    </select>
+      <p>
+        Based on the selection you make, here would be the condition expression
+        you would use (JavaScript):
+      </p>
 
-    <p>
-      Based on the selection you make, here would be the condition expression you would use (JavaScript):
-    </p>
-
-    <h2>Condition Expression</h2>
-    <pre>
+      <h2>Condition Expression</h2>
+      <pre>
 
   <code id="filterExpression">Please select a date range filter...</code>
     </pre>
 
-    <!-- <h2>Explanation</h2>
+      <!-- <h2>Explanation</h2>
     <p id="explanation">Please select a date range filter...</p> -->
-  </div>
+    </div>
 
-  <script src="./js/jquery-3.5.1.slim.min.js"></script>
-  <script src="./js/popper.min.js"></script>
-  <script src="./js/bootstrap.bundle.min.js"></script>
-  <script src="./js/d3.v6.min.js"></script>
-  <script src="./js/app.js"></script>
-</body>
-
+    <script src="./js/jquery-3.5.1.slim.min.js"></script>
+    <script src="./js/popper.min.js"></script>
+    <script src="./js/bootstrap.bundle.min.js"></script>
+    <script src="./js/d3.v6.min.js"></script>
+    <script src="./js/app.js"></script>
+  </body>
 </html>
